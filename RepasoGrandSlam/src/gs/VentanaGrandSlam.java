@@ -57,7 +57,7 @@ public class VentanaGrandSlam extends JFrame{
         main.setLayout(new BorderLayout());
 		this.add(main);
 		tenistas = new ArrayList<>();
-		cargarUltimasRutas("C:\\Users\\alvar\\eclipse-workspace\\RepasoGrandSlam\\rutas.csv");		
+		cargarUltimasRutas("rutas.csv");		
 		
 		//----PANEL BOTONES ARRIBA---
 		JPanel panelBotonesArriba = new JPanel(new FlowLayout());
@@ -460,7 +460,7 @@ public class VentanaGrandSlam extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				rutaTorneoCSV = rTorneo.getText();
 				rutaResultadoCSV = rResultados.getText();
-				guardarRutas("C:\\Users\\alvar\\eclipse-workspace\\RepasoGrandSlam\\rutas.csv");
+				guardarRutas("rutas.csv");
 				
 				//cargamos nuevos y borramos antiguos
 				if(!rutaResultadoCSV.isEmpty()) {

@@ -92,6 +92,8 @@ public class VentanaGrandSlam extends JFrame{
         panelBotonAbajo = new JPanel(new FlowLayout());
         JButton botonAñadirResultado = new JButton("Añadir Resultado");
         panelBotonAbajo.add(botonAñadirResultado);
+        JButton bEliminarResultado = new JButton("Eliminar Resultado");
+        panelBotonAbajo.add(bEliminarResultado);
         //main.add(panelBotonAbajo, BorderLayout.SOUTH); 
         
         botonAñadirResultado.addActionListener(new ActionListener() {
@@ -113,6 +115,32 @@ public class VentanaGrandSlam extends JFrame{
 
             public void keyReleased(KeyEvent e) {
             }
+        });
+        
+        bEliminarResultado.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int filaResultado = tablaResultados.getSelectedRow();
+				if(filaResultado != -1) {
+				
+					Resultado resultadoEliminar = new Resultado( (int) modelo.getValueAt(filaResultado, 0), (String) modelo.getValueAt(filaResultado, 1), (String) modelo.getValueAt(filaResultado, 2), (int) modelo.getValueAt(filaResultado, 3), (String)modelo.getValueAt(filaResultado, 4), (String)modelo.getValueAt(filaResultado, 5),(int) modelo.getValueAt(filaResultado, 6), (String)modelo.getValueAt(filaResultado, 7),(String) modelo.getValueAt(filaResultado, 8), null );
+					modelo.removeRow(filaResultado);
+					
+					List<Resultado> newResultados = new ArrayList<>();
+					for(Resultado r:resultados) {
+						if(!sonIguales(r, resultadoEliminar)) {
+							newResultados.add(r);
+						}
+					}
+					resultados = newResultados;
+					
+				}else {
+					JOptionPane.showMessageDialog(null, "Selecciona una fila primero!");
+				}
+
+			}
+        	
         });
         
         JButton botonGuardar = new JButton("Guardar Datos");
@@ -592,6 +620,18 @@ public class VentanaGrandSlam extends JFrame{
 				panel.add(new JLabel("Subcampeón: "+resultado.getSubCampeon()));
 			}
 		}
+	}
+	
+	private boolean sonIguales(Resultado r1, Resultado r2) {
+	    return r1.getAño() == r2.getAño() &&
+	           r1.getTorneo().equals(r2.getTorneo()) &&
+	           r1.getCampeon().equals(r2.getCampeon()) &&
+	           r1.getRankingCampeon() == r2.getRankingCampeon() &&
+	           r1.getNacionalidadCampeon().equals(r2.getNacionalidadCampeon()) &&
+	           r1.getSubCampeon().equals(r2.getSubCampeon()) &&
+	           r1.getRankingSubcampeon() == r2.getRankingSubcampeon() &&
+	           r1.getNacionalidadSubcampeon().equals(r2.getNacionalidadSubcampeon()) &&
+	           r1.getResultado().equals(r2.getResultado());
 	}
 	
 }
